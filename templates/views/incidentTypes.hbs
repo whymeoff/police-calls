@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-block">
+        <h1>Incident Types</h1>
+        <form action="/admin/incidents" method="POST">
+            <label for="">Incident Name</label>
+            <input type="text" name="name" id="name">
+            <label for="">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            <button type="submit" id="add-btn">Add</button>
+        </form>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Action</td>
+            </tr>
+            {{#each incidents}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>
+                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/incidents">Delete</button>
+                        <button id="edit-btn" class="edit-btn" data-entity="incident" data-id="{{this.id}}" data-path="incidents">Edit</button>
+                    </td>
+                </tr> 
+            {{/each}}
+        </table>
+    </div>
+
+    <div style="text-align: center" id="popupWin" class="modalwin">
+        <h2>Edit</h2>
+        <form>
+            <label for="">Incident Name</label>
+            <input value="" class="editInputs" data-field="name">
+            <label for="">Description</label>
+            <textarea name="" id="" cols="30" rows="10" class="editInputs" data-field="description"></textarea>
+            <button id="save-btn" type="submit" data-id="">Save</button>
+        </form>
+
+    </div>   
+
+    <script src="/js/delete-btn.js"></script>
+    <script src="/js/edit-btn.js"></script>
+</body>
+</html>

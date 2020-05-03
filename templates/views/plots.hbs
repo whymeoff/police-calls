@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-block">
+        <h1>Plots</h1>
+        <form action="/admin/plots" method="POST">
+            <label for="">Address</label>
+            <input type="text" name="address" id="rolename">
+            <button type="submit" id="add-btn">Add</button>
+        </form>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Address</td>
+                <td>Action</td>
+            </tr>
+            {{#each plots}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.address}}</td>
+                    <td>
+                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/plots">Delete</button>
+                        <button id="edit-btn" class="edit-btn" data-entity="plot" data-id="{{this.id}}" data-path="plots">Edit</button>
+                    </td>
+                </tr> 
+            {{/each}}
+        </table>
+    </div>
+
+    <div style="text-align: center" id="popupWin" class="modalwin">
+        <h2>Edit</h2>
+        <form>
+            <label for="">Address</label>
+            <input value="" class="editInputs" data-field="address">
+            <button id="save-btn" type="submit" data-id="">Save</button>
+        </form>
+
+    </div>
+
+    <script src="/js/delete-btn.js"></script>
+    <script src="/js/edit-btn.js"></script>
+</body>
+</html>

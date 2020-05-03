@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-block">
+        <h1>Cars</h1>
+        <form action="/admin/cars" method="POST">
+            <label for="">Model</label>
+            <input type="text" name="model" id="model">
+            <label for="">Color</label>
+            <input type="text" name="color" id="">
+            <label for="">Govnumber</label>
+            <input type="text" name="govnumber">
+            <label for="">Plot</label>
+            <select name="PlotId" id="">
+                {{#each plots}}
+                    <option value="{{this.id}}">{{this.address}}</option>
+                {{/each}}
+            </select>
+            <button type="submit" id="add-btn">Add</button>
+        </form>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Model</td>
+                <td>Color</td>
+                <td>Govnumber</td>
+                <td>Plot</td>
+                <td>Action</td>
+            </tr>
+            {{#each cars}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.model}}</td>
+                    <td>{{this.color}}</td>
+                    <td>{{this.govnumber}}</td>
+                    <td>{{this.Plot.address}}</td>
+                    <td>
+                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/cars">Delete</button>
+                        <button id="edit-btn" class="edit-btn" data-entity="car" data-id="{{this.id}}" data-path="cars">Edit</button>
+                    </td>
+                </tr> 
+            {{/each}}
+        </table>
+    </div>
+
+    <div style="text-align: center" id="popupWin" class="modalwin">
+        <h2>Edit</h2>
+        <form>
+            <label for="">Model</label>
+            <input value="" class="editInputs" data-field="model">
+            <label for="">Color</label>
+            <input type="text" name="" id="" class="editInputs" data-field="color">
+            <label for="">Govnumber</label>
+            <input type="text" name="" id="" class="editInputs" data-field="govnumber">
+            <label for="">Plot</label>
+            <select name="" id="" data-field="PlotId" class="editInputs">
+                {{#each plots}}
+                    <option value="{{this.id}}">{{this.address}}</option>
+                {{/each}}
+            </select>
+            <button id="save-btn" type="submit" data-id="">Save</button>
+        </form>
+
+    </div> 
+
+
+    <script src="/js/delete-btn.js"></script>
+    <script src="/js/edit-btn.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+form {
+    margin: 24px auto;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+form input {
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 20px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+form select {
+    margin-bottom: 10px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 20px;
+    padding: 10px 0;
+    color: rgb(102, 102, 102);
+    padding-left: 10px;
+}
+
+form textarea {
+    resize: none;
+    border: 1px solid rgb(219, 219, 219);
+    border-right: none;
+    border-left: none;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+#delete-btn {
+    background: rgb(255, 57, 57);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.5s;
+    width: 33%;
+}
+
+#delete-btn:hover {
+    background: rgb(255, 28, 28);
+    transition: background 0.5s;
+}
+
+#edit-btn {
+    background: rgb(255, 57, 57);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.5s;
+    width: 33%;
+}
+
+#edit-btn:hover {
+    background: rgb(255, 28, 28);
+    transition: background 0.5s;
+}
+
+#add-btn {
+    background: rgb(49, 218, 63);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+
+#add-btn:hover {
+    background: rgb(26, 202, 41);
+    transition: background 0.5s;
+}
+
+form label {
+    text-align: center;
+    font-size: 14px;
+    color: rgb(158, 158, 158);
+    margin-bottom: 8px;
+}
+

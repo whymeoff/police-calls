@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-block">
+        <h1>Staff</h1>
+        <form action="/admin/staff" method="POST">
+            <label for="">Full Name</label>
+            <input type="text" name="fullname" id="name">
+            <label for="">age</label>
+            <input type="text" name="age" id="name">
+            <label for="">Address</label>
+            <input type="text" name="address" id="name">
+            <label for="">Role</label>
+            <select name="RoleId" id="" placeholder="Role">
+                {{#each roles}}
+                    <option value="{{this.id}}">{{this.rolename}}</option>
+                {{/each}}
+            </select>
+            <label for="">Plot</label>
+            <select name="PlotId" id="">
+                {{#each plots}}
+                    <option value="{{this.id}}">{{this.address}}</option>
+                {{/each}}
+            </select>
+            <label for="">Crew</label>
+            <select name="CrewId" id="">
+                {{#each crews}}
+                    <option value="{{this.id}}">{{this.crewName}}</option>
+                {{/each}}
+            </select>
+            <button type="submit" id="add-btn">Add</button>
+        </form>
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Full Name</td>
+                <td>Age</td>
+                <td>Address</td>
+                <td>Role</td>
+                <td>Plot</td>
+                <td>Crew</td>
+                <td>Action</td>
+            </tr>
+            {{#each staff}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.fullname}}</td>
+                    <td>{{this.age}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.Role.rolename}}</td>
+                    <td>{{this.Plot.address}}</td>
+                    <td>{{this.Crew.crewName}}</td>
+                    <td>
+                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/staff">Delete</button>
+                        <button id="edit-btn" class="edit-btn" data-entity="staff" data-id="{{this.id}}" data-path="staff">Edit</button>
+                    </td>
+                </tr> 
+            {{/each}}
+        </table>
+    </div>
+
+    <div style="text-align: center" id="popupWin" class="modalwin">
+        <h2>Edit</h2>
+        <form>
+            <label for="">Full Name</label>
+            <input type="text" name="fullname" id="name" class="editInputs" data-field="fullname">
+            <label for="">age</label>
+            <input type="text" name="age" id="name" class="editInputs" data-field="age">
+            <label for="">Address</label>
+            <input type="text" name="address" id="name" class="editInputs" data-field="address">
+            <label for="">Role</label>
+            <select name="RoleId" id="" class="editInputs" data-field="RoleId">
+                {{#each roles}}
+                    <option value="{{this.id}}" class="option">{{this.rolename}}</option>
+                {{/each}}
+            </select>
+            <label for="">Plot</label>
+            <select name="PlotId" id="" class="editInputs" data-field="PlotId">
+                {{#each plots}}
+                    <option value="{{this.id}}" class="option">{{this.address}}</option>
+                {{/each}}
+            </select>
+            <label for="">Crew</label>
+            <select name="CrewId" id="" class="editInputs" data-field="CrewId">
+                {{#each crews}}
+                    <option value="{{this.id}}" class="option">{{this.crewName}}</option>
+                {{/each}}
+            </select>
+            <button id="save-btn" data-id="">Save</button>
+        </form>
+
+    </div> 
+
+    <script src="/js/delete-btn.js"></script>
+    <script src="/js/edit-btn.js"></script>
+</body>
+</html>
