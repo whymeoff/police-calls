@@ -19,6 +19,9 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
+app.use(express.static(path.join(__dirname, '../public')))
+
+app.use('/admin', require('./routers/admin'))
 
 app.listen(PORT, () => {
     console.log('Server is up on port ' + PORT)

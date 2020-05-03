@@ -36,5 +36,6 @@ module.exports = {
     Crew,
     Staff,
     Call,
-    Member
+    Member, 
+    IncidentType
 }
