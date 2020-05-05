@@ -1,0 +1,16 @@
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 8px 0;
+}
+
+.top-nav li {
+    list-style: none;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px dashed black;
+}

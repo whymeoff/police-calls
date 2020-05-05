@@ -1,0 +1,121 @@
+.nav-menu {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    margin: 16px auto 0;
+}
+
+.nav-menu li {
+    display: block;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.active {
+    color: red;
+    border-bottom: 1px dashed red;
+}
+
+button:focus {
+    outline: none;
+}
+
+.add-btn {
+    background: white;
+    border: 1px solid rgb(49, 218, 63);
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: rgb(49, 218, 63);
+    cursor: pointer;
+    transition: all 0.5s;
+    margin-bottom: 8px;
+}
+
+.add-btn:hover {
+    background: rgb(26, 202, 41);
+    color: white;
+    transition: all 0.5s;
+}
+
+.remove-btn {
+    background: white;;
+    border: 1px solid rgb(255, 57, 57);
+    color: rgb(255, 57, 57);
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+.remove-btn:hover {
+    background: rgb(255, 57, 57);
+    color: white;
+    transition: all 0.5s;
+}
+
+#complete-btn {
+    background: rgb(22, 33, 180);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: background 0.5s;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+#complete-btn:hover {
+    background: rgb(14, 21, 114);
+    transition: background 0.5s;
+}
+
+
+.single-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.description-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.desc-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.desc-buttons button {
+    background: white;
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+.green-btn {
+    border: 1px solid rgb(49, 218, 63);
+    color: rgb(49, 218, 63);
+}
+
+.green-btn:hover {
+    background: rgb(49, 218, 63);
+    color: white;
+    transition: all 0.5s;
+}
+
+.red-btn {
+    border: 1px solid rgb(255, 57, 57);
+    color: rgb(255, 57, 57);
+}
+
+.red-btn:hover {
+    background: rgb(255, 57, 57);
+    color: white;
+    transition: all 0.5s;
+}

@@ -1,0 +1,23 @@
+.report-block {
+    padding: 0 48px 28px !important;
+    text-align: start !important;
+}
+
+.member-role {
+    margin-left: 10px;
+}
+
+.call-description {
+    width: 500px;
+    word-wrap: break-word;
+}
+
+p {
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+h3 {
+    margin: 10px 0;
+}
+

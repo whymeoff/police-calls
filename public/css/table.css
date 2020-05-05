@@ -2,6 +2,7 @@ table {
     border-collapse: collapse;
     text-align: center;
     width: 100%;
+    margin-top: 16px;
 }
 
 table, tr, td {
@@ -10,4 +11,20 @@ table, tr, td {
 
 td {
     padding: 8px 0;
+}
+
+.accept-btn, .complete-btn, #report-btn {
+    background: rgb(49, 218, 63);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.5s;
+    font-size: 14px;
+}
+
+.accept-btn:hover, .complete-btn:hover, #report-btn:hover {
+    background: rgb(26, 202, 41);
+    transition: background 0.5s;
 }
