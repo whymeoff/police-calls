@@ -14,25 +14,33 @@
 <body>
     <div class="main-block">
         {{>nav}}
-        <h1>Plots</h1>
-        <form action="/admin/plots" method="POST">
+        <h1>Members</h1>
+        <form action="/admin/members" method="POST">
+            <label for="">Full Name</label>
+            <input type="text" name="fullname" id="">
+            <label for="">Age</label>
+            <input type="text" name="age" id="">
             <label for="">Address</label>
-            <input type="text" name="address" id="rolename">
+            <input type="text" name="address">
             <button type="submit" id="add-btn">Add</button>
         </form>
         <table border="1">
             <tr>
                 <td>ID</td>
+                <td>Full Name</td>
+                <td>Age</td>
                 <td>Address</td>
                 <td>Action</td>
             </tr>
-            {{#each plots}}
+            {{#each members}}
                 <tr>
                     <td>{{this.id}}</td>
+                    <td>{{this.fullname}}</td>
+                    <td>{{this.age}}</td>
                     <td>{{this.address}}</td>
                     <td>
-                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/plots">Delete</button>
-                        <button id="edit-btn" class="edit-btn" data-entity="plot" data-id="{{this.id}}" data-path="plots">Edit</button>
+                        <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/members">Delete</button>
+                        <button id="edit-btn" class="edit-btn" data-entity="member" data-id="{{this.id}}" data-path="members">Edit</button>
                     </td>
                 </tr> 
             {{/each}}
@@ -42,12 +50,17 @@
     <div style="text-align: center" id="popupWin" class="modalwin">
         <h2>Edit</h2>
         <form>
+            <label for="">Full Name</label>
+            <input value="" class="editInputs" data-field="fullname">
+            <label for="">Age</label>
+            <input type="text" name="" id="" class="editInputs" data-field="age">
             <label for="">Address</label>
-            <input value="" class="editInputs" data-field="address">
+            <input type="text" name="" id="" class="editInputs" data-field="address">
             <button id="save-btn" type="submit" data-id="">Save</button>
         </form>
 
-    </div>
+    </div> 
+
 
     <script src="/js/delete-btn.js"></script>
     <script src="/js/edit-btn.js"></script>

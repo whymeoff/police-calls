@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/edit.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/calls.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/report.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-block">
+        {{>nav}}
+        <h1>Calls</h1>
+        <ul class="nav-menu">
+            <li><a href="/calls?status=received" class="{{#if_eq this.status 'received'}}active{{/if_eq}}">Received</a></li>
+            <li><a href="/calls?status=accepted" class="{{#if_eq this.status 'accepted'}}active{{/if_eq}}">Accepted</a></li>
+            <li><a href="/calls?status=completed" class="{{#if_eq this.status 'completed'}}active{{/if_eq}}">Completed</a></li>
+        </ul>
+        <table border="1">
+                <tr>
+                    <td>ID</td>
+                    <td>Addressee</td>
+                    <td>Address</td>
+                    <td>Description</td>
+                    <td>Status</td>
+                    <td>Crew</td>
+                    <td>Action</td>
+                </tr>
+                {{#each calls}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.addressee}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.Crew.crewName}}</td>
+                        <td>
+                        {{#if_eq this.status 'received'}}
+                            <button class="accept-btn" data-id="{{this.id}}">Accept</button>
+                        {{/if_eq}}
+                        {{#if_eq this.status 'accepted'}}
+                            <button class="complete-btn" data-id="{{this.id}}">Complete</button>
+                        {{/if_eq}}
+                        {{#if_eq this.status 'completed'}}
+                            <button id="report-btn" onclick="showModalWin()" data-id="{{this.id}}">Report</button>
+                        {{/if_eq}}
+                    </td>
+                </tr> 
+            {{/each}}
+        </table>
+    </div>
+        {{#if_eq calls.0.status 'received'}}
+            <div style="text-align: center" id="popupWin" class="modalwin">
+            <h2>Accept call</h2>
+            <form>
+                <label for="">Crew</label>
+                <select name="" id="crew-id">
+                    {{#each crews}}
+                        <option value="{{this.id}}">{{this.crewName}}</option>
+                    {{/each}}
+                </select>
+                <button id="accept-btn" data-id="">Accept</button>
+            </form>
+
+        </div> 
+        {{/if_eq}}
+
+        {{#if_eq calls.0.status 'accepted'}}
+            <div id="popupWin" style="text-align: center" class="modalwin">
+                <h2>Complete call</h2>
+                <form>
+                    <label for="">Member ID</label>
+                    <input type="text" id="member-id">
+                    <button id="add-member" class="add-btn" data-id="">Add</button>
+                    <div id="members"></div>
+                    <label for="">Incident ID</label>
+                    <input type="text" id="incident-id">
+                    <div id="incidents"></div>
+                    <button id="add-incident" class="add-btn" data-id="">Add</button>
+                    <button id="complete-btn" onclick="completeCall()" data-call="">Complete</button>
+                </form>
+            </div> 
+        {{/if_eq}}
+
+        {{#if_eq calls.0.status 'completed'}}
+        <div id="report-root"></div>
+        {{/if_eq}}
+
+        {{#if_eq calls.0.status 'received'}}<script src="/js/accept-call.js"></script>{{/if_eq}}
+        {{#if_eq calls.0.status 'accepted'}}<script src="/js/complete-call.js"></script>{{/if_eq}}
+        {{#if_eq calls.0.status 'completed'}}<script src="/js/report-btn.js"></script>{{/if_eq}}
+</body>
+</html>
