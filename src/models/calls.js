@@ -12,6 +12,10 @@ const Call = {
     description: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    status: {
+        type: DataTypes.STRING,
+        defaultValue: 'received'
     }
 }
 

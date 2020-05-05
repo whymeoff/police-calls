@@ -8,6 +8,9 @@ const Staff = sequelize.define('Staff', require('./staff'))
 const Call = sequelize.define('Call', require('./calls'))
 const Member = sequelize.define('Member', require('./members'))
 const IncidentType = sequelize.define('IncidentType', require('./incidentTypes'))
+const IncidentMember = sequelize.define('IncidentMember', require('./incidentMembers'))
+const CallIncident = sequelize.define('CallIncident', {})
+
 
 Plot.hasMany(Car)
 Car.belongsTo(Plot)
@@ -21,10 +24,10 @@ Crew.hasMany(Staff)
 Staff.belongsTo(Crew)
 Crew.hasMany(Call)
 Call.belongsTo(Crew)
-Call.belongsToMany(Member, { through: 'IncidentMembers' })
-Member.belongsToMany(Call, { through: 'IncidentMembers' })
-Call.belongsToMany(IncidentType, { through: 'CallIncidents' })
-IncidentType.belongsToMany(Call, { through: 'CallIncidents' })
+Call.belongsToMany(Member, { through: IncidentMember })
+Member.belongsToMany(Call, { through: IncidentMember })
+Call.belongsToMany(IncidentType, { through: CallIncident })
+IncidentType.belongsToMany(Call, { through: CallIncident })
 
 sequelize.sync()
 
@@ -37,5 +40,7 @@ module.exports = {
     Staff,
     Call,
     Member, 
-    IncidentType
+    IncidentType,
+    IncidentMember,
+    CallIncident
 }

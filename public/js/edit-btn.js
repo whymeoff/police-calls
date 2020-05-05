@@ -7,7 +7,7 @@ if (edit_btns) {
 }
 
 async function showModalWin(e) {
-    const path = e.target.getAttribute('data-path')
+    const path = event.target.getAttribute('data-path')
     const editInputs = document.getElementsByClassName('editInputs')
 
     const jsonData = await fetch(`/admin/${path}/${e.target.getAttribute('data-id')}`)

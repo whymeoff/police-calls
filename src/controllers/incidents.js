@@ -1,4 +1,4 @@
-const { IncidentType } = require('../models/incidentTypes')
+const { IncidentType } = require('../models/index')
 
 const getIncidents = async (req, res) => {
     const incidents = await IncidentType.findAll()

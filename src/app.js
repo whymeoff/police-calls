@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./hbsConfig')
 require('./db/sqlite')
 require('./models/index')
 const express = require('express')
@@ -22,6 +23,8 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(path.join(__dirname, '../public')))
 
 app.use('/admin', require('./routers/admin'))
+app.use('/calls', require('./routers/calls'))
+app.get('/', (req, res) => res.render('index'))
 
 app.listen(PORT, () => {
     console.log('Server is up on port ' + PORT)
