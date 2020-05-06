@@ -4,7 +4,8 @@ const add_incident = document.querySelector('#add-incident')
 
 let incidents = []
 let members = []
-let member = []
+let obj = {}
+let name
 let flag = 0
 
 if (complete_btns) {
@@ -42,6 +43,7 @@ function showModalWin(e) {
         body[0].style.filter = 'blur(0px)'
         incidents = []
         members = []
+        obj = {}
         return false;
     };
 }
@@ -101,7 +103,8 @@ function addMemberFunc(e) {
         .then((data) => {
             if (data.member) {
                 membersBlock.innerHTML = `<div class="description-block"><label>Role of member</label><input type="text" id="member-desc"><div class="desc-buttons"><button onclick="addMemberDesc()" class="green-btn">Confirm</button><button onclick="cancelMember()" class="red-btn">Cancel</button></div></div>` + membersBlock.innerHTML
-                member.push(input.value, data.member.fullname)
+                obj.member = input.value
+                name = data.member.fullname
             } else {
                 return false
             }
@@ -115,13 +118,14 @@ function addMemberDesc() {
 
     if (!desc) return false
 
-    member.push(desc)
-    members.push(member)
+    obj.description = desc
+    members.push(obj)
 
     document.querySelectorAll('.description-block')[0].remove()
 
-    document.querySelector('#members').innerHTML += `<div class="single-block" data-id="${member[0]}"><p>${member[1]}</p><button class="remove-btn" onclick="removeMember()">Remove</button></div>`
-    member = []
+    document.querySelector('#members').innerHTML += `<div class="single-block" data-id="${obj[0]}"><p>${name}</p><button class="remove-btn" onclick="removeMember()">Remove</button></div>`
+    obj = {}
+    name = []
     flag = 0
 }
 
@@ -129,6 +133,7 @@ function cancelMember() {
     document.querySelectorAll('.description-block')[0].remove()
     document.querySelector('#member-id').value = ''
     flag = 0
+    obj = {}
 }
 
 function removeMember() {

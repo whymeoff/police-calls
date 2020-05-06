@@ -34,7 +34,7 @@ async function showModalWin(e) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ CrewId: document.getElementById('crew-id').value })
+            body: JSON.stringify({ crew: document.getElementById('crew-id').value })
         })
         .then(() => {
                 window.location.reload()

@@ -1,44 +1,34 @@
 const { Member } = require('../models/index')
 
 const getMembers = async (req, res) => {
-    const members = await Member.findAll()
+    const members = await Member.find()
 
     res.render('members', { members })
 }
 
 const getMember = async (req, res) => {
-    const member = await Member.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    const member = await Member.findById(req.params.id)
 
     res.send({ member })
 }
 
 const updateMember = async (req, res) => {
-    await Member.update(
-        { ...req.body },
-        { where: {
-            id: req.params.id
-        } }
+    await Member.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body }
     )
 
     res.send()
 }
 
 const postMember = async (req, res) => {
-    await Member.build({ ...req.body }).save()
+    await new Member({ ...req.body }).save()
 
     res.redirect('/admin/members')
 }
 
 const deleteMember = async (req, res) => {
-    await Member.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    await Member.findByIdAndDelete(req.params.id)
 
     res.redirect('/admin/members')
 }

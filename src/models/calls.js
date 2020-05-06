@@ -1,22 +1,41 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const Call = {
+const Call = new mongoose.Schema({
     addressee: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     address: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     status: {
-        type: DataTypes.STRING,
-        defaultValue: 'received'
-    }
-}
+        type: String,
+        default: 'received'
+    },
+    crew: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Crew'
+    },
+    incidents: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'IncidentType',
+    }],
+    members: [{
+        member: {
+            type: mongoose.Types.ObjectId,
+            ref: 'Member',
+            autopopulate: true
+        },
+        description: {
+            type: String
+        }
+    }]
+},
+{ timestamps: true })
 
 module.exports = Call

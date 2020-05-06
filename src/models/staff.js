@@ -1,18 +1,33 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const Staff = {
+const Staff = new mongoose.Schema({
     fullname: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     age: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: Number,
+        required: true
     },
     address: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
+    },
+    role: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: 'Role'
+    },
+    plot: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: 'Plot'
+    },
+    crew: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: 'Crew'
     }
-}
+})
 
 module.exports = Staff

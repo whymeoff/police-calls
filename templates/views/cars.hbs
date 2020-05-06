@@ -23,7 +23,7 @@
             <label for="">Govnumber</label>
             <input type="text" name="govnumber">
             <label for="">Plot</label>
-            <select name="PlotId" id="">
+            <select name="plot" id="">
                 {{#each plots}}
                     <option value="{{this.id}}">{{this.address}}</option>
                 {{/each}}
@@ -45,7 +45,7 @@
                     <td>{{this.model}}</td>
                     <td>{{this.color}}</td>
                     <td>{{this.govnumber}}</td>
-                    <td>{{this.Plot.address}}</td>
+                    <td>{{this.plot.address}}</td>
                     <td>
                         <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/cars">Delete</button>
                         <button id="edit-btn" class="edit-btn" data-entity="car" data-id="{{this.id}}" data-path="cars">Edit</button>
@@ -65,7 +65,7 @@
             <label for="">Govnumber</label>
             <input type="text" name="" id="" class="editInputs" data-field="govnumber">
             <label for="">Plot</label>
-            <select name="" id="" data-field="PlotId" class="editInputs">
+            <select name="" id="" data-field="plot" class="editInputs">
                 {{#each plots}}
                     <option value="{{this.id}}">{{this.address}}</option>
                 {{/each}}

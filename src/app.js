@@ -1,7 +1,6 @@
 require('dotenv').config()
 require('./hbsConfig')
-require('./db/sqlite')
-require('./models/index')
+require('./db/mongoose')
 const express = require('express')
 const hbs = require('hbs')
 const path = require('path')

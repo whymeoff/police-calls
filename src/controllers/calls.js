@@ -5,18 +5,15 @@ const getMakeCallPage = (req, res) => {
 }
 
 const postCall = async (req, res) => {
-    await Call.build({ ...req.body }).save()
+    await new Call({ ...req.body }).save()
 
     res.redirect('/')
 }
 
 const acceptCall = async (req, res) => {
-    console.log('here')
-    await Call.update(
-        { status: 'accepted', CrewId: req.body.CrewId },
-        { where: {
-            id: req.params.id 
-        } }
+    await Call.findByIdAndUpdate(
+        req.params.id,
+        { status: 'accepted', crew: req.body.crew },
     )
 
     res.redirect('/calls')
@@ -25,15 +22,10 @@ const acceptCall = async (req, res) => {
 const getCallsPage = async (req, res) => {
     const promises = []
 
-    promises.push(Call.findAll({
-        where: {
-            status: req.query.status || 'received'
-        },
-        include: Crew
-    }))
+    promises.push(Call.find({status: req.query.status || 'received' }).populate('crew'))
 
     if (!req.query.status || req.query.status === 'received') {
-        promises.push(Crew.findAll())
+        promises.push(Crew.find())
     }
 
     const data = await Promise.all(promises)
@@ -43,28 +35,11 @@ const getCallsPage = async (req, res) => {
 
 const completeCalls = async (req, res) => {
     const { members, incidents, call } = req.body
-    const promises = []
 
-    members.map((el) => {
-        promises.push(IncidentMember.build({ CallId: parseInt(call), MemberId: parseInt(el[0]), description: el[2] }).save())
-    })
-
-    incidents.map((el) => {
-        promises.push(CallIncident.build({ CallId: parseInt(call), IncidentTypeId: parseInt(el) }).save())
-    })
-
-    promises.push(Call.update( 
-        { status: 'completed' },
-        { where: {
-            id: call
-        } })
+    await Call.findByIdAndUpdate( 
+        call,
+        { status: 'completed', incidents, members },
     )
-
-    try {
-        await Promise.all(promises)
-    } catch (e) {
-        console.log(e)
-    }
 
     res.send()
 }
@@ -72,14 +47,11 @@ const completeCalls = async (req, res) => {
 const getReport = async (req, res) => {
     const CallId = req.params.id
 
-    const call = await Call.findOne({
-        where: {
-            id: CallId
-        },
-        include: [Member, IncidentType]
-    })
+    const call = await Call.findById(CallId)
+        .populate('incidents')
+        .populate('members.member')
 
-    res.send({ call: call.toJSON() })
+    res.send({ call })
 }
 
 module.exports = {

@@ -1,27 +1,21 @@
 const { IncidentType } = require('../models/index')
 
 const getIncidents = async (req, res) => {
-    const incidents = await IncidentType.findAll()
+    const incidents = await IncidentType.find()
 
     res.render('incidentTypes', { incidents })
 }
 
 const getIncident = async (req, res) => {
-    const incident = await IncidentType.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    const incident = await IncidentType.findById(req.params.id)
 
     res.send({ incident })
 }
 
 const updateIncident = async (req, res) => {
-    await IncidentType.update(
+    await IncidentType.findByIdAndUpdate(
+        req.params.id,
         { ...req.body },
-        { where: {
-            id: req.params.id
-        } }
     )
 
     res.send()
@@ -29,7 +23,7 @@ const updateIncident = async (req, res) => {
 
 const postIncident = async (req, res) => {
     try {
-        await IncidentType.build({ name: req.body.name, description: req.body.description }).save()
+        await new IncidentType({ name: req.body.name, description: req.body.description }).save()
     } catch (e) {
         console.log(e)
     }
@@ -37,11 +31,7 @@ const postIncident = async (req, res) => {
 }
 
 const deleteIncident = async (req, res) => {
-    await IncidentType.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    await IncidentType.findByIdAndDelete(req.params.id)
 
     res.redirect('/admin/incidents')
 }

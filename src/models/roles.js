@@ -1,10 +1,10 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const Role = {
+const Role = new mongoose.Schema({
     rolename: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     }
-}
+})
 
 module.exports = Role

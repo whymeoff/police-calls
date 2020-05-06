@@ -1,10 +1,10 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const Plot = {
+const Plot = new mongoose.Schema({
     address: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     }
-}
+})
 
 module.exports = Plot

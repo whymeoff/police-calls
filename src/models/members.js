@@ -1,18 +1,18 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const Member = {
+const Member = new mongoose.Schema({
     fullname: {
-        type: DataTypes.STRING,
+        type: String,
         allowNull: false
     },
     age: {
-        type: DataTypes.INTEGER,
+        type: Number,
         allowNull: false
     },
     address: {
-        type: DataTypes.STRING,
+        type: String,
         allowNull: false
     }
-}
+})
 
 module.exports = Member

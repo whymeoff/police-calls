@@ -1,8 +1,9 @@
 const { Plot, Car } = require('../models/index')
 
 const getCars = async (req, res) => {
-    const cars = Car.findAll({ include: Plot })
-    const plots = Plot.findAll()
+    const cars = Car.find({})
+        .populate('plot')
+    const plots = Plot.find()
 
     const data = await Promise.all([cars, plots])
 
@@ -10,41 +11,30 @@ const getCars = async (req, res) => {
 }
 
 const getCar = async (req, res) => {
-    const car = await Car.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    const car = await Car.findById(req.params.id)
 
     res.send({ car })
 }
 
 const updateCar = async (req, res) => {
-    await Car.update(
-        { ...req.body },
-        { where: {
-            id: req.params.id
-        } }
+    await Car.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body }
     )
 
     res.send()
 }
 
 const postCar = async (req, res) => {
-    let { model, color, govnumber, PlotId } = req.body
-    PlotId = parseInt(PlotId)
+    let { model, color, govnumber, plot } = req.body
 
-    await Car.build({ model, color, govnumber, PlotId }).save()
+    await new Car({ model, color, govnumber, plot }).save()
 
     res.redirect('/admin/cars')
 }
 
 const deleteCar = async (req, res) => {
-    await Car.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    await Car.findByIdAndDelete(req.params.id)
 
     res.redirect('/admin/cars')
 }

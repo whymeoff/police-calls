@@ -1,10 +1,13 @@
 const { Plot, Crew, Role, Staff } = require('../models/index')
 
 const getStaff = async (req, res) => {
-    const roles = Role.findAll()
-    const plots = Plot.findAll()
-    const crews = Crew.findAll()
-    const staff = Staff.findAll({ include: [Role, Plot, Crew] })
+    const roles = Role.find()
+    const plots = Plot.find()
+    const crews = Crew.find()
+    const staff = Staff.find()
+        .populate('crew')
+        .populate('role')
+        .populate('plot')
 
     const data = await Promise.all([roles, plots, crews, staff])
 
@@ -12,45 +15,30 @@ const getStaff = async (req, res) => {
 }
 
 const getOneStaff = async (req, res) => {
-    const staff = await Staff.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    const staff = await Staff.findById(req.params.id)
 
     res.send({ staff })
 }
 
 const updateStaff = async (req, res) => {
-    await Staff.update(
-        { ...req.body },
-        { where: {
-            id: req.params.id
-        } }
+    await Staff.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body }
     )
 
     res.send()
 }
 
 const postStaff = async (req, res) => {
-    let { fullname, age, address, PlotId, CrewId, RoleId } = req.body
+    let { fullname, age, address, plot, crew, role } = req.body
 
-    age = parseInt(age)
-    PlotId = parseInt(PlotId)
-    CrewId = parseInt(CrewId)
-    RoleId = parseInt(RoleId)
-
-    await Staff.build({ fullname, age, address, PlotId, CrewId, RoleId }).save()
+    await new Staff({ fullname, age, address, plot, crew, role }).save()
 
     res.redirect('/admin/staff')
 }
 
 const deleteStaff = async (req, res) => {
-    await Staff.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    await Staff.findByIdAndDelete(req.params.id)
 
     res.redirect('/admin/staff')
 }

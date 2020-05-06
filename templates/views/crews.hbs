@@ -19,7 +19,7 @@
             <label for="">Crew Name</label>
             <input type="text" name="crewName" id="rolename">
             <label for="">Car</label>
-            <select name="CarId" id="">
+            <select name="car" id="">
                 {{#each cars}}
                     <option value="{{this.id}}">{{this.govnumber}}</option>
                 {{/each}}
@@ -37,7 +37,7 @@
                 <tr>
                     <td>{{this.id}}</td>
                     <td>{{this.crewName}}</td>
-                    <td>{{this.Car.govnumber}}</td>
+                    <td>{{this.car.govnumber}}</td>
                     <td>
                         <button id="delete-btn" data-id="{{this.id}}" data-url="/admin/crews">Delete</button>
                         <button id="edit-btn" class="edit-btn" data-entity="crew" data-id="{{this.id}}" data-path="crews">Edit</button>
@@ -53,9 +53,9 @@
             <label for="">Crew Name</label>
             <input value="" class="editInputs" data-field="crewName">
             <label for="">Car</label>
-            <select name="CarId" id="" data-field="CarId" class="editInputs">
+            <select name="car" id="" data-field="car" class="editInputs">
                 {{#each cars}}
-                    <option value="{{this.id}}" class="option">{{this.govnumber}}</option>
+                    <option value="{{this._id}}" class="option">{{this.govnumber}}</option>
                 {{/each}}
             </select>
             <button id="save-btn" type="submit" data-id="">Save</button>

@@ -13,9 +13,10 @@ async function showModalWin(e) {
     const jsonData = await fetch(`/admin/${path}/${e.target.getAttribute('data-id')}`)
     const data = await jsonData.json()
     const entityName = e.target.getAttribute('data-entity')
-
+    console.log(data)
     for (let i = 0; i < editInputs.length; i++) {
         if (editInputs[i].selectedIndex !== undefined) {
+            console.log('here')
             editInputs[i].selectedIndex = findChild(parseChild(editInputs[i].childNodes), data[entityName][editInputs[i].dataset.field])
             console.log(editInputs[i].childNodes)
             continue
@@ -45,7 +46,6 @@ async function showModalWin(e) {
     };
 
     save_btn.onclick = () => {
-        console.log('click')
         fetch(`/admin/${path}/${e.target.getAttribute('data-id')}`, {
             method: 'PATCH',
             headers: {
@@ -54,7 +54,7 @@ async function showModalWin(e) {
             body: JSON.stringify(parseObj(editInputs))
         })
         .then((res) => {
-            window.location.reload()
+            // window.location.reload()
         })
     }
 }
@@ -65,18 +65,18 @@ const parseObj = (inputs) => {
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].selectedIndex !== undefined) {
             // obj[inputs[i].dataset.field] = document.getElementsByClassName('option')[inputs[i].selectedIndex].value
-            obj[inputs[i].dataset.field] = parseInt(inputs[i].value)
+            obj[inputs[i].dataset.field] = inputs[i].value
             continue
         }
         obj[inputs[i].dataset.field] = inputs[i].value
     }
-
+    console.log(obj)
     return obj
 }
 
 const findChild = (options, value) => {
     for (let i = 0; i < options.length; i++) {
-        if (parseInt(options[i].value) === value) {
+        if (options[i].value === value) {
             return i
         }
     }

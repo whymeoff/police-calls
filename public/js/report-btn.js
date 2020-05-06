@@ -24,7 +24,7 @@ async function showModalWin(e) {
 
 function parseReport(call) {
     let html = `<div style="text-align: center" id="popupWin" class="modalwin report-block">
-        <h1>Call number: ${call.id}</h1>
+        <h1>Call number: ${call._id}</h1>
         <h3>Main information:</h3>
         <p>Addressee: ${call.addressee}</p>
         <p>Address: ${call.address}</p>
@@ -35,18 +35,18 @@ function parseReport(call) {
         <h3>Incidents: </h3>
     `
 
-    call.IncidentTypes.map((el) => {
+    call.incidents.map((el) => {
         html += `<p>Incident name: ${el.name}</p>`
     })
 
     html += `<h3>Members:</h3>`
 
-    call.Members.map((el) => {
-        html += `<p>Name: ${this.fullname}</p>
-                <p class="member-role">Role: ${el.IncidentMember.description}</p>`
+    call.members.map((el) => {
+        html += `<p>Name: ${el.member.fullname}</p>
+                <p class="member-role">Role: ${el.description}</p>`
     })
 
     html += '</div>'
-    console.log(html)
+
     return html
 }

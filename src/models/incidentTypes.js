@@ -1,14 +1,14 @@
-const { DataTypes } = require('sequelize')
+const mongoose = require('mongoose')
 
-const IncidentType = {
+const IncidentType = new mongoose.Schema({
     name: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
+        required: true
     }
-}
+})
 
 module.exports = IncidentType

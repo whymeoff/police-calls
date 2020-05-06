@@ -1,35 +1,13 @@
-const sequelize = require('../db/sqlite')
+const mongoose = require('mongoose')
 
-const Car = sequelize.define('Car', require('./cars'))
-const Plot = sequelize.define('Plot', require('./plots'))
-const Role = sequelize.define('Role', require('./roles'))
-const Crew = sequelize.define('Crew', require('./crews'))
-const Staff = sequelize.define('Staff', require('./staff'))
-const Call = sequelize.define('Call', require('./calls'))
-const Member = sequelize.define('Member', require('./members'))
-const IncidentType = sequelize.define('IncidentType', require('./incidentTypes'))
-const IncidentMember = sequelize.define('IncidentMember', require('./incidentMembers'))
-const CallIncident = sequelize.define('CallIncident', {})
-
-
-Plot.hasMany(Car)
-Car.belongsTo(Plot)
-Car.hasMany(Crew)
-Crew.belongsTo(Car)
-Role.hasMany(Staff)
-Staff.belongsTo(Role)
-Plot.hasMany(Staff)
-Staff.belongsTo(Plot)
-Crew.hasMany(Staff)
-Staff.belongsTo(Crew)
-Crew.hasMany(Call)
-Call.belongsTo(Crew)
-Call.belongsToMany(Member, { through: IncidentMember })
-Member.belongsToMany(Call, { through: IncidentMember })
-Call.belongsToMany(IncidentType, { through: CallIncident })
-IncidentType.belongsToMany(Call, { through: CallIncident })
-
-sequelize.sync()
+const Car = mongoose.model('Car', require('./cars'))
+const Plot = mongoose.model('Plot', require('./plots'))
+const Role = mongoose.model('Role', require('./roles'))
+const Crew = mongoose.model('Crew', require('./crews'))
+const Staff = mongoose.model('Staff', require('./staff'))
+const Call = mongoose.model('Call', require('./calls'))
+const Member = mongoose.model('Member', require('./members'))
+const IncidentType = mongoose.model('IncidentType', require('./incidentTypes'))
 
 module.exports = {
     Car,
@@ -40,7 +18,5 @@ module.exports = {
     Staff,
     Call,
     Member, 
-    IncidentType,
-    IncidentMember,
-    CallIncident
+    IncidentType
 }

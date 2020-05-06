@@ -1,27 +1,21 @@
 const { Role } = require('../models/index.js')
 
 const getRoles = async (req, res) => {
-    const roles = await Role.findAll()
+    const roles = await Role.find()
 
     res.render('roles', { roles })
 }
 
 const getRole = async (req, res) => {
-    const role = await Role.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    const role = await Role.findById(req.params.id)
 
     res.send({ role })
 }
 
 const updateRole = async (req, res) => {
-    await Role.update(
-        { ...req.body },
-        { where: {
-            id: req.params.id
-        } }
+    await Role.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body }
     )
 
     res.send()
@@ -29,7 +23,7 @@ const updateRole = async (req, res) => {
 
 const postRole = async (req, res) => {
     try {
-        await Role.build({ rolename: req.body.rolename }).save()
+        await new Role({ rolename: req.body.rolename }).save()
     } catch (e) {
         console.log(e)
     }
@@ -37,11 +31,7 @@ const postRole = async (req, res) => {
 }
 
 const deleteRole = async (req, res) => {
-    await Role.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    await Role.findByIdAndDelete(req.params.id)
 
     res.redirect('/admin/roles')
 }
