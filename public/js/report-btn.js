@@ -42,7 +42,7 @@ function parseReport(call) {
     html += `<h3>Members:</h3>`
 
     call.Members.map((el) => {
-        html += `<p>Name: ${this.fullname}</p>
+        html += `<p>Name: ${el.fullname}</p>
                 <p class="member-role">Role: ${el.IncidentMember.description}</p>`
     })
 
