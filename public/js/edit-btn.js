@@ -16,9 +16,8 @@ async function showModalWin(e) {
     console.log(data)
     for (let i = 0; i < editInputs.length; i++) {
         if (editInputs[i].selectedIndex !== undefined) {
-            console.log('here')
             editInputs[i].selectedIndex = findChild(parseChild(editInputs[i].childNodes), data[entityName][editInputs[i].dataset.field])
-            console.log(editInputs[i].childNodes)
+
             continue
         }
         editInputs[i].value = data[entityName][editInputs[i].dataset.field]
